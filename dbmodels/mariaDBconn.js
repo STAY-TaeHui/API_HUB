@@ -1,6 +1,4 @@
 var mariadb = require('mariadb');
-var config = require('../dbconfig');
-
 const pool = mariadb.createPool(
   {
     host: process.env.DB_HOST,

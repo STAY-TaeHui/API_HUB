@@ -1,3 +1,4 @@
+var dotenv = require('dotenv').config();
 const path = require('path');
 const Sequelize = require('sequelize');
 

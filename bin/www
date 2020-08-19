@@ -3,11 +3,12 @@
 /**
  * Module dependencies.
  */
-var dotenv = require('dotenv').config();
-var app = require('../app');
+var dotenv = require('dotenv')
+var app = require('../src/app');
 var debug = require('debug')('test-api-1:server');
 var http = require('http');
 
+dotenv.config();
 /**
  * Get port from environment and store in Express.
  */

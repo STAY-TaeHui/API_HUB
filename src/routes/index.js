@@ -1,4 +1,4 @@
-var mdbConn = require('../models/mariaDBConn');
+var mdbConn = require('../../dbmodels/mariaDBConn');
 var express = require('express');
 var router = express.Router();
 
