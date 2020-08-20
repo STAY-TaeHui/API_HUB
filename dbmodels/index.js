@@ -13,4 +13,5 @@ db.Sequelize = Sequelize;
 
 db.BusTime = require('../src/models/bustime')(sequelize,Sequelize);
 
+
 module.exports = db;

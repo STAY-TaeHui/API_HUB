@@ -1,14 +1,13 @@
-const { sequelize } = require("../../dbmodels");
-const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define(
+    var bus_time_df = sequelize.define(
         'bus_time',
         {
             BUS_ID:{
                 type:DataTypes.INTEGER(11),
                 allowNull:false,
                 uniquie:true,
+                primaryKey:true,
             },
             WEEK_OF_DAY:{
                 type:DataTypes.STRING(10),
@@ -23,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull:false,
 
             }
+        },{
+            tableName:"bus_time",
+            freezeTableName: true,
+            timestamps:false,
+            
         }
-    )
+    );
+    return bus_time_df;
 }

@@ -1,21 +1,15 @@
-const {BusTime, Sequelize} = require('../../models/bustime');
-const BusTime_MD = require('../../models/bustime');
+const {BusTime} = require('../../models/bustime');
+const db = require('../../../dbmodels/index');
+const {Op} = require('sequelize').Op;
 
 const getBusTimeDAO = async(req,res)=>{
     try {
-        
     console.log("This is getBusTimeDAO");
-    const result = "HELLO FUCKSHIT"
+    const result = await db.BusTime.findAll();
     return result;
-    } catch (error) {
-        console.log(error);
+    } catch (e) {
+        console.log("daoERROR"+e);
+        throw e;
     }
-    
-    // try {
-    //     const result = await BusTime.findAll();
-    //     return result;
-    // } catch (error) {
-    //     console.long(error);
-    // }
 }
 module.exports = {getBusTimeDAO};

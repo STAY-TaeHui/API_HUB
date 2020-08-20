@@ -2,7 +2,7 @@
   "development": {
     "username": "test_1",
     "password": "hoseobus",
-    "database": "mysql",
+    "database": "HOSEO_BUS2",
     "host": "uck.myds.me",
     "dialect": "mariadb",
     "dialectOptions": 
