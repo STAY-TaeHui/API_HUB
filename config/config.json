@@ -1,10 +1,13 @@
 {
   "development": {
-    "username": "masta",
-    "password": "tjxogml",
+    "username": "test_1",
+    "password": "hoseobus",
     "database": "mysql",
-    "host": "127.0.0.1",
-    "dialect": "mariadb"
+    "host": "uck.myds.me",
+    "dialect": "mariadb",
+    "dialectOptions": 
+    { "timezone": "Etc/GMT+9"}
+
   },
   "test": {
     "username": "root",
