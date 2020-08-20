@@ -11,20 +11,22 @@ const pool = mariadb.createPool(
   }
 );
 
-const getUserList = async (req,res) =>{
+const createConnection = async (req,res) =>{
   let conn, rows;
   try {
-    conn = await pool.getConnection();
+    conn = await pool.getConnection(); //DB연결
     console.log("--------------------------------CONNECTION SUCCEES----------------------------------")
   }
   catch (err) { 
     console.log("CONNECTION FAILE");
     throw err; 
   }
-  finally {
-    if (conn) conn.end();
+  // finally {
+  //   if (conn) conn.end();//DB연결 해제
+  //   console.log("--------------------------------CONNECTION END----------------------------------")
+
     
-  }
+  // }
 }
 
-module.exports = { getUserList, }
+module.exports = { createConnection }

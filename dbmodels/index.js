@@ -11,4 +11,6 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.BusTime = require('../src/models/bustime')(sequelize,Sequelize);
+
 module.exports = db;
