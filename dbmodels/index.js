@@ -11,7 +11,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.BusTime = require('../src/models/bustime')(sequelize,Sequelize);
+db.BusTime = require('../src/models/bus/bustime_md')(sequelize,Sequelize);//models폴더의 모델들 등록
 
 
 module.exports = db;

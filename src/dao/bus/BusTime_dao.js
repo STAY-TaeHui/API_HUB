@@ -1,10 +1,11 @@
-const {BusTime} = require('../../models/bustime');
+const {BusTime} = require('../../models/bus/bustime_md');
 const db = require('../../../dbmodels/index');
 const {Op} = require('sequelize').Op;
 
-const getBusTimeDAO = async(req,res)=>{
+const patchBusTimeDAO = async(data)=>{
     try {
-    console.log("This is getBusTimeDAO");
+    console.log("This is patchBusTimeDAO");
+    return console.log(data);
     const result = await db.BusTime.findAll();
     return result;
     } catch (e) {
@@ -12,4 +13,4 @@ const getBusTimeDAO = async(req,res)=>{
         throw e;
     }
 }
-module.exports = {getBusTimeDAO};
+module.exports = {patchBusTimeDAO};

@@ -3,12 +3,13 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var dotenv = require('dotenv')
+var bodyparser = require('body-parser');
 dotenv.config();
 
 var sequelize = require('../dbmodels/index').sequelize; // sequelize require
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var connection = require('../dbmodels/mariaDBconn')
+var connection = require('../dbmodels/mariaDBconn');
+
 connection.createConnection();//DB연결 호출
 
 var app = express();
@@ -19,6 +20,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.use(bodyParser.urlencoded({extended:true}))
+// app.use(bodyParser.json);                            대신에 express.json()사용
+
 
 app.use('/', indexRouter);//메인 라우터
 
