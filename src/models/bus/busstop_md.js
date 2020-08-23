@@ -9,31 +9,43 @@ module.exports = (sequelize, DataTypes) => {
                 uniquie:true,
                 primaryKey:true,
             },
-            BOADRING_LOCATION:{
-                type:DataTypes.STRING(10),
+            BUS_STOP_NAME:{
+                type:DataTypes.STRING(20),
                 allowNull:false,
-            },
-            LATITUDE:{
-
-            },
-            LONGITUDE:{
-
-            },
-            PRICE:{
-
-            },
-            C_PRICE:{
-
+                primaryKey:true,
             },
             CODE:{
-
-            }
+                type:DataTypes.STRING(5),
+                allowNull:false,
+                primaryKey:true,
+            },
+            BOADRING_LOCATION:{
+                type:DataTypes.STRING(10),
+                allowNull:true,
+            },
+            LATITUDE:{
+                type:DataTypes.DOUBLE(),
+                allowNull:true,
+            },
+            LONGITUDE:{
+                type:DataTypes.DOUBLE(),
+                allowNull:true,
+            },
+            C_PRICE:{
+                type:DataTypes.INTEGER(11),
+                allowNull:true,
+            },
+            A_PRICE:{
+                type:DataTypes.INTEGER(11),
+                allowNull:true,
+            },
+            
         },{
-            tableName:"bus_time",
+            tableName:"bus_stop",
             freezeTableName: true,
             timestamps:false,
             
         }
     );
-    return bus_time_df;
+    return bus_stop_df;
 }

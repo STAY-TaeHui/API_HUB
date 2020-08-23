@@ -13,8 +13,7 @@ var connection = require('../dbmodels/mariaDBconn');
 connection.createConnection();//DB연결 호출
 
 var app = express();
-
-// sequelize.sync();
+//sequelize.sync();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,7 +24,6 @@ app.use(cookieParser());
 
 
 app.use('/', indexRouter);//메인 라우터
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
