@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var http = require('http');
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -19,8 +20,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(bodyParser.urlencoded({extended:true}))
-// app.use(bodyParser.json);                            대신에 express.json()사용
+
 
 
 app.use('/', indexRouter);//메인 라우터

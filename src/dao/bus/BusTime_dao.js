@@ -5,8 +5,8 @@ const {Op} = require('sequelize').Op;
 
 const patchBusTimeDAO = async(data)=>{
     try {
-       let results;
-       let time = 1;
+       let result=0;
+       var time = 1;
     console.log("This is patchBusTimeDAO");
     db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');    //FK제약조건 무시
     await data.timeList.forEach(i => { //FK조건때문에 time 현재 forEach에서 임의값으로 초기화 후 밑의 forEach에서 UPDATE진행 
@@ -48,6 +48,7 @@ const patchBusTimeDAO = async(data)=>{
         );
         time=time+1;
         } catch (e) {
+            console.log("3")
             throw e;
         }
     }//SET BUS_TIME= body.BUSTIME where IDX_BUS_LINE:i.IDX_BUS_LINE AND WEEK_OF_DAY:i.WEEK_OF_DAY
@@ -77,7 +78,7 @@ const patchBusTimeDAO = async(data)=>{
             W_O_D = "Fri";
             break;
         };
-        results =db.BusTime.update(
+        db.BusTime.update(
             {
             BUS_TIME: i.BUS_TIME
         },
@@ -86,9 +87,16 @@ const patchBusTimeDAO = async(data)=>{
                 IDX_BUS_LINE:i.IDX_BUS_LINE,
                 WEEK_OF_DAY:W_O_D,
         }}
-        );
+        ).then(
+            result++, console.log("병신"+result))
+        .catch((e)=>{
+            result--,console.log("신병"+result)
+            console.log("1")
+            throw e;
+        })
         
         } catch (e) {
+            console.log("2")
             throw e;
         }
         
@@ -100,8 +108,8 @@ const patchBusTimeDAO = async(data)=>{
     );
     
     // db.BusTime.sequelize.query('SET FOREIGN_KEY_CHECKS = 1');    //FK제약조건 무시해제
-    console.log("resutl"+results);
-    return results;
+    console.log("resutl"+result);
+    return result;
     } catch (e) {
         console.log("daoERROR"+e);
         throw e;
