@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             IDX_BUS_LINE:{
                 type:DataTypes.INTEGER(11),
                 allowNull:false,
+                autoIncrement: true,
                 uniquie:true,
                 primaryKey:true,
             },

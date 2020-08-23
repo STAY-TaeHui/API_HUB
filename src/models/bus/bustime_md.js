@@ -1,4 +1,4 @@
-
+var db = require('../../../dbmodels/index');
 module.exports = (sequelize, DataTypes) => {
     var bus_time_df = sequelize.define(
         'bus_time',
@@ -12,10 +12,12 @@ module.exports = (sequelize, DataTypes) => {
             WEEK_OF_DAY:{
                 type:DataTypes.STRING(10),
                 allowNull:false,
+                primaryKey:true,
             },
             BUS_TIME:{
                 type:DataTypes.TIME,
                 allowNull:false,
+                primaryKey:true,
             },
             IDX_BUS_LINE:{
                 type:DataTypes.INTEGER(11),
@@ -29,5 +31,8 @@ module.exports = (sequelize, DataTypes) => {
             
         }
     );
+    bus_time_df.associate = function(db){
+        db.BusTime.hasMany(db.TicketList,{foreignKey:'TICKET_TIME',onUpdate:'cascade'});
+    }
     return bus_time_df;
 }
