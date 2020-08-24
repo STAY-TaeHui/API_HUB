@@ -6,9 +6,10 @@ const patchBusTime = async (req,res)=>{
         
         const data = req.body;
         const result = await patchBusTimeDAO(data);
-        return res.json({BUS_TIME:result});
+        return res.json({RESULT:result});
     } catch (e) {
         console.log("services ERROR"+e);
+        res.status(400).json(e);
     }
     
 };

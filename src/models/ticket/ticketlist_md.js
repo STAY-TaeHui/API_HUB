@@ -54,7 +54,12 @@ module.exports = (sequelize, DataTypes) => {
             freezeTableName: true,
             timestamps:false,
             
-        }
+            
+        },
+        
     );
+    ticket_list_df.associate = function(db){
+        db.TicketList.belongsTo(db.BusTime,{foreignKey:'TICKET_TIME',onUpdate:'cascade'});
+    }
     return ticket_list_df;
 }

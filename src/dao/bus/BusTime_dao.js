@@ -1,7 +1,6 @@
 const {BusTime} = require('../../models/bus/bustime_md');
 const db = require('../../../dbmodels/index');
 const e = require('express');
-const {Op} = require('sequelize').Op;
 
 const patchBusTimeDAO = async(data)=>{
     try {
@@ -45,7 +44,7 @@ const patchBusTimeDAO = async(data)=>{
                 IDX_BUS_LINE:i.IDX_BUS_LINE,
                 WEEK_OF_DAY:W_O_D,
         }}
-        );
+        ).catch((e)=>{throw e})
         time=time+1;
         } catch (e) {
             console.log("3")

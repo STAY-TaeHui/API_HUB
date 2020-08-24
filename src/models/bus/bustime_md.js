@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
             freezeTableName: true,
             timestamps:false,
             
+            
         }
     );
     bus_time_df.associate = function(db){

@@ -1,15 +1,15 @@
-const {deleteBusLineDAO} = require('../../dao/bus/BusLine_D_dao')
+const {postBusStopDAO} = require('../../dao/bus/BusStop_C_dao')
 
-const deleteBusLine = async (req,res)=>{
+const postBusStop = async (req,res)=>{
     try {
         console.log("This is postBustLine in services");
         
         const data = req.body;
-        const result = await deleteBusLineDAO(data);
+        const result = await postBusStopDAO(data);
         return res.json({RESULT:result});
     } catch (e) {
         console.log("services ERROR"+e);
         res.status(400).json(e);
     }
 };
-module.exports = {deleteBusLine};
+module.exports = {postBusStop};

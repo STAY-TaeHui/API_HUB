@@ -6,9 +6,10 @@ const postBusLine = async (req,res)=>{
         
         const data = req.body;
         const result = await postBusLineDAO(data);
-        return res.json({BUS_Line:result});
+        return res.json({RESULT:result});
     } catch (e) {
         console.log("services ERROR"+e);
+        res.status(400).json(e);
     }
 };
 module.exports = {postBusLine};

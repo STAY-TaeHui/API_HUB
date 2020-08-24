@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             IDX:{
                 type:DataTypes.INTEGER(11),
                 allowNull:false,
+                autoIncrement: true,
                 uniquie:true,
                 primaryKey:true,
             },
@@ -26,18 +27,22 @@ module.exports = (sequelize, DataTypes) => {
             LATITUDE:{
                 type:DataTypes.DOUBLE(),
                 allowNull:true,
+                defaultValue:0
             },
             LONGITUDE:{
                 type:DataTypes.DOUBLE(),
                 allowNull:true,
+                defaultValue:0
             },
             C_PRICE:{
                 type:DataTypes.INTEGER(11),
                 allowNull:true,
+                defaultValue:0
             },
             A_PRICE:{
                 type:DataTypes.INTEGER(11),
                 allowNull:true,
+                defaultValue:0
             },
             
         },{
