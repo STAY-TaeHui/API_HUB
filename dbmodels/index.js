@@ -16,6 +16,9 @@ db.BusStop = require('../src/models/bus/busstop_md')(sequelize,Sequelize);
 db.BusTime = require('../src/models/bus/bustime_md')(sequelize,Sequelize);
 db.BusLine = require('../src/models/bus/busline_md')(sequelize,Sequelize);
 db.TicketList = require('../src/models/ticket/ticketlist_md')(sequelize,Sequelize);
+db.ShuttleStop = require('../src/models/shuttle/shuttlestop_md')(sequelize,Sequelize);
+db.ShuttleLine = require('../src/models/shuttle/shuttleline_md')(sequelize,Sequelize);
+db.ShuttleTime = require('../src/models/shuttle/shuttletime_md')(sequelize,Sequelize);
 
 //관계정의 
     //BusStop 1 - M BusLine
@@ -31,5 +34,17 @@ db.BusTime.hasMany(db.TicketList, { foreignKey: 'BUS_ID', sourceKey:'BUS_ID'});
 db.TicketList.belongsTo(db.BusTime, { foreignKey: 'BUS_ID', targetKey:'BUS_ID'});
 db.BusTime.hasMany(db.TicketList, { foreignKey: 'TICKET_TIME', sourceKey:'BUS_TIME'});
 db.TicketList.belongsTo(db.BusTime, { foreignKey: 'TICKET_TIME', targetKey:'BUS_TIME'});
+
+    //ShuttleStop 1 - M ShuttleLine
+db.ShuttleStop.hasMany(db.ShuttleLine,{foreignKey:'SHUTTLE_STOP_NAME', sourceKey:'SHUTTLE_STOP_NAME'});
+db.ShuttleLine.belongsTo(db.ShuttleStop,{foreignKey:'SHUTTLE_STOP_NAME', sourceKey:'SHUTTLE_STOP_NAME'});
+
+    //ShuttleLine 1 - M ShuttleTime
+db.ShuttleLine.hasMany(db.ShuttleTime,{foreignKey:'IDX', sourceKey:'IDX'});
+db.ShuttleTime.belongsTo(db.ShuttleLine,{foreignKey:'IDX_BUS_LILNE', targetKey:'IDX'});
+db.ShuttleLine.hasMany(db.ShuttleTime,{foreignKey:'CODE', sourceKey:'CODE'});
+db.ShuttleTime.belongsTo(db.ShuttleLine,{foreignKey:'CODE', targetKey:'CODE'});
+db.ShuttleLine.hasMany(db.ShuttleTime,{foreignKey:'LINE_NAME', sourceKey:'LINE_NAME'});
+db.ShuttleTime.belongsTo(db.ShuttleLine,{foreignKey:'LINE_NAME', targetKey:'LINE_NAME'});
 
 module.exports = db;

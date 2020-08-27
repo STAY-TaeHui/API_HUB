@@ -13,7 +13,7 @@ const patchBusStopDAO = async(data)=>{
         },
             {
                 where:{
-                    BUS_STOP_NAME: data.BUS_STOP_NAME,
+                    IDX: data.IDX,
                     CODE: data.CODE
                 }
             })

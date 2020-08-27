@@ -54,6 +54,7 @@ const patchBusTimeDAO = async(data)=>{
     );
     data.timeList.forEach(i => {
         try {
+            console.log("time - " + time);
             var W_O_D;
         switch (i.WEEK_OF_DAY){
             case 0:
@@ -94,6 +95,7 @@ const patchBusTimeDAO = async(data)=>{
             throw e;
         })
         
+        time=time+1
         } catch (e) {
             console.log("2")
             throw e;
