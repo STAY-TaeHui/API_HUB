@@ -39,8 +39,11 @@ const testPatchBusTimeDAO = async(data)=>{
             where:{
                 IDX_BUS_LINE:i.IDX_BUS_LINE,
                 WEEK_OF_DAY:W_O_D,
-        }}        
-        ).then()
+        }
+        },{
+            returning:true
+        }        
+        ).then((row)=>console.log(row[0]))
         .catch((e)=>{
             console.log("1")
             throw e;

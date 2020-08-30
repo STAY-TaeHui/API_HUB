@@ -4,9 +4,6 @@ const patchShuttleTimeDAO = async(data)=>{
     try {
         let timeList = data.timeList
         for(let i=0; i<timeList.length; i++){
-            console.log(timeList[i].BUS_TIME);
-            console.log(timeList[i].BUS_ID);
-            console.log(timeList[i].IDX_BUS_LINE)
             await db.ShuttleTime.update(
                 {
                     BUS_TIME:timeList[i].BUS_TIME

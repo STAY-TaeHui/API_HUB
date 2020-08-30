@@ -12,12 +12,15 @@ var router = require('express').Router();
 
 router.post('/stop/create',postShuttleStop);
 router.post('/stop/update',patchShuttleStop);
-router.post('/time/create',postShuttleTime);
+
+router.post('/bus/create',postShuttleTime);
 router.post('/bus/delete',deleteShuttleTime);//원래 url /time/delete
+router.post('/time/update',patchShuttleTime);
+
 router.post('/line/create',postShuttleLine);
 router.post('/line/delete',deleteShuttleLine);
 router.post('/line/update',patchShuttleLine);
-router.post('/time/update',patchShuttleTime);
+
 
 // router.post('/stop/update')
 
