@@ -19,6 +19,5 @@
     "morgan": "~1.9.1",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.4"
-  },
-  "proxy": "uck.myds.me:3001/"
+  }
 }
