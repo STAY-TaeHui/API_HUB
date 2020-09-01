@@ -81,47 +81,42 @@ const F_delete = async (line_arr,data)=>{
     }   
 }
 
-const F_create = async (line_arr, data,record_c)=>{
+const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표도 생성
     try {
-        ID_MAX = await db.ShuttleTime.max('BUS_ID');
+        ID_MAX = await db.ShuttleTime.max('BUS_ID');///////ㅆ:빨러마 이거 때매 안되는거니까 수정해라 ㅈ되기실흐염ㄴ
         
-        for(let i=record_c; i<line_arr.length; i++){
+        for(var i=record_c; i<line_arr.length; i++){
             tmp=ID_MAX;
-            await db.ShuttleLine.create({
+            await db.ShuttleLine.create({//라인 생성
                         LINE_NAME:data.lineName,
                         SEQUENCE:i+1,
                         SHUTTLE_STOP_NAME:line_arr[i],
                         CODE:data.code
                     })
             .then(async(result)=>{
-                await db.ShuttleLine.findOne({
+                await db.ShuttleLine.findOne({//라인 생성 후 해당 IDX를 찾음
                     attributes:['IDX'],
                     where:{
                         LINE_NAME:data.lineName, SHUTTLE_STOP_NAME:line_arr[0], CODE:data.code
                     }
                 })
-                .then(async(id)=>{
+                .then(async(id)=>{//해당 IDX의 갯수를 찾음
                     const count = await db.ShuttleTime.count({
                         where:{IDX_BUS_LINE:id.dataValues.IDX}
                     })
-                    console.log(count)
-                        for(let a=0; a<count; a++){
+                        for(var a=0; a<count; a++){//갯수만큼 반복문을 돌며 시간표 생성해줌
                             tmp++;
-                            if(a>=60){
-                               
+                            function time_conv(num)
+                            {
+                                let hours = Math.floor(num/60);
+                                let minutes = num%60;
+                                let second = num/60%60;
+                                return hours + ":" +minutes + ":"+second;
                             }
-                                console.log(tmp);
-                                console.log(result.dataValues.IDX)
-                                console.log(i);
-                                console.log(data.code)
-                                console.log(data.lineName)
-                                console.log(i+1)
-                                console.log(result.dataValues.IDX)
-                                console.log()
                             
                             await db.ShuttleTime.create({
                                 BUS_ID:tmp,
-                                BUS_TIME:a,////////////////씨빨껐이꺼쪠빨
+                                BUS_TIME:time_conv(a),
                                 CODE:data.code,
                                 LINE_NAME:data.lineName,
                                 SEQUENCE:i+1,
@@ -156,20 +151,19 @@ const patchShuttleLineDAO = async(data)=>{//update를 쓰기엔 무리가 있어
             console.log('COUNT ERROR');
             throw e;
         })
-        console.log('레코드는~~~~~~ '+record_c);
 
         if(record_c == line_arr.length){//수정하려는 레코드 수와 같을때 - Just Update
-            // F_update(line_arr,data,record_c);
+            F_update(line_arr,data,record_c);
 
         }
         else if(record_c > line_arr.length){//수정하려는 레코드 수가 더 작을때 - Update / delete
         db.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');//FK제약조건 무시
-            // F_update(line_arr, data, line_arr.length);
-            // F_delete(line_arr,data);
+            F_update(line_arr, data, line_arr.length);
+            F_delete(line_arr,data);
             
         }
         else if(record_c < line_arr.length){//수정하려는 레코드 수가 더 클때 - Update / create
-            // F_update(line_arr, data, record_c);
+            F_update(line_arr, data, record_c);
             F_create(line_arr,data,record_c);
         }
     } catch (e) {
