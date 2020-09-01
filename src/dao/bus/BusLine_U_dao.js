@@ -83,11 +83,9 @@ const F_delete = async (line_arr,data)=>{
 
 const F_create = async (line_arr, data, record_c)=>{
     try {
-        console.log('크리에이트문')
         ID_MAX = await db.BusTime.max('BUS_ID');
         
         for(let i=record_c; i<line_arr.length; i++){
-            console.log('크리에이트문 FOR문',i)
             tmp=ID_MAX;
             await db.BusLine.create({
                 BUS_LINE_NAME:data.lineName,
@@ -95,7 +93,6 @@ const F_create = async (line_arr, data, record_c)=>{
                 BUS_STOP_NAME:line_arr[i]
             })
             .then(async(result)=>{
-                console.log('라인 크리에이트 성공@@@')
                 for(let a=0; a<5; a++){
                     tmp++
                     switch (a){

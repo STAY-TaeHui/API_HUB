@@ -48,7 +48,6 @@ const testPatchBusTimeDAO = async(data)=>{
             console.log("1")
             throw e;
         });
-        db.sequelize.query('SET FOREIGN_KEY_CHECKS = 1');//FK제약조건 무시해제
         return result;
     });//SET BUS_TIME= body.BUSTIME where IDX_BUS_LINE:i.IDX_BUS_LINE AND WEEK_OF_DAY:i.WEEK_OF_DAY
     
