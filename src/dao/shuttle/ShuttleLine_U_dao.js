@@ -82,11 +82,8 @@ const F_delete = async (line_arr,data)=>{
 }
 
 const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표도 생성
-    try {
-        ID_MAX = await db.ShuttleTime.max('BUS_ID');///////ㅆ:빨러마 이거 때매 안되는거니까 수정해라 ㅈ되기실흐염ㄴ
-        
+    try {        
         for(var i=record_c; i<line_arr.length; i++){
-            tmp=ID_MAX;
             await db.ShuttleLine.create({//라인 생성
                         LINE_NAME:data.lineName,
                         SEQUENCE:i+1,
@@ -94,7 +91,7 @@ const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표
                         CODE:data.code
                     })
             .then(async(result)=>{
-                await db.ShuttleLine.findOne({//라인 생성 후 해당 IDX를 찾음
+                await db.ShuttleLine.findOne({//라인 생성 후 해당 라인의 첫번째 IDX를 찾음
                     attributes:['IDX'],
                     where:{
                         LINE_NAME:data.lineName, SHUTTLE_STOP_NAME:line_arr[0], CODE:data.code
@@ -104,8 +101,16 @@ const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표
                     const count = await db.ShuttleTime.count({
                         where:{IDX_BUS_LINE:id.dataValues.IDX}
                     })
+                    const BUSID_INIT = await db.ShuttleTime.findOne({
+                        
+                            attributes:['BUS_ID'],
+                        
+                        where:{
+                            IDX_BUS_LINE:id.dataValues.IDX,
+                        }
+                    })
+
                         for(var a=0; a<count; a++){//갯수만큼 반복문을 돌며 시간표 생성해줌
-                            tmp++;
                             function time_conv(num)
                             {
                                 let hours = Math.floor(num/60);
@@ -113,9 +118,10 @@ const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표
                                 let second = num/60%60;
                                 return hours + ":" +minutes + ":"+second;
                             }
+
                             
                             await db.ShuttleTime.create({
-                                BUS_ID:tmp,
+                                BUS_ID:BUSID_INIT.dataValues.BUS_ID,
                                 BUS_TIME:time_conv(a),
                                 CODE:data.code,
                                 LINE_NAME:data.lineName,
@@ -124,6 +130,7 @@ const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표
                             })
                             .then(()=>{'버스타임 크리에이트성공###'})
                             .catch((e)=>{throw e})
+                            BUSID_INIT.dataValues.BUS_ID++;
                         }
                 })
                 .catch((e)=>{throw e})
