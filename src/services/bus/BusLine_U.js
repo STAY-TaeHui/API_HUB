@@ -1,4 +1,4 @@
-const {patchBusLineDAO} = require('../../dao/Bus/BusLine_U_dao')
+const {patchBusLineDAO} = require('../../dao/bus/BusLine_U_dao')
 
 const patchBusLine = async (req,res)=>{
     try {

@@ -34,8 +34,6 @@ const F_update = async(line_arr, data, len)=>{
                 else{//서로 값이 같을때
                     console.log('같다@@@@@');
                 }
-                
-    
             })
             .catch((e)=> {throw e})
         }
@@ -101,6 +99,8 @@ const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표
                     const count = await db.ShuttleTime.count({
                         where:{IDX_BUS_LINE:id.dataValues.IDX}
                     })
+                    .catch((e)=>{throw e})
+
                     const BUSID_INIT = await db.ShuttleTime.findOne({
                         
                             attributes:['BUS_ID'],
@@ -109,6 +109,7 @@ const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표
                             IDX_BUS_LINE:id.dataValues.IDX,
                         }
                     })
+                    .catch((e)=>{throw e})
 
                         for(var a=0; a<count; a++){//갯수만큼 반복문을 돌며 시간표 생성해줌
                             function time_conv(num)
@@ -134,8 +135,6 @@ const F_create = async (line_arr, data,record_c)=>{//라인 생성 후 시간표
                         }
                 })
                 .catch((e)=>{throw e})
-                
-                
                 
             })
             .catch((e)=>{throw e})
