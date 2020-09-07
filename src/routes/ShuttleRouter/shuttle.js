@@ -10,18 +10,16 @@ var {patchShuttleTime} = require('../../services/shuttle/ShuttleTime_U');
 
 var router = require('express').Router();
 
-router.post('/stop/create',postShuttleStop);
-router.post('/stop/update',patchShuttleStop);
+router.post('/stop/create',postShuttleStop);//정류장 생성
+router.post('/stop/update',patchShuttleStop);//정류장 수정
 
-router.post('/bus/create',postShuttleTime);
-router.post('/bus/delete',deleteShuttleTime);//원래 url /time/delete
-router.post('/time/update',patchShuttleTime);
+router.post('/bus/create',postShuttleTime);//배차생성
+router.post('/bus/delete',deleteShuttleTime);//배차삭제
+router.post('/time/update',patchShuttleTime);//시간수정
 
-router.post('/line/create',postShuttleLine);
-router.post('/line/delete',deleteShuttleLine);
-router.post('/line/update',patchShuttleLine);
+router.post('/line/create',postShuttleLine);//노선 생성
+router.post('/line/delete',deleteShuttleLine);//노선 삭제
+router.post('/line/update',patchShuttleLine);//노선 수정
 
-
-// router.post('/stop/update')
 
 module.exports = router;

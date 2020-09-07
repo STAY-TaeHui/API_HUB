@@ -9,10 +9,12 @@ const F_update = async(line_arr, data, len)=>{
             await db.BusLine.findOne({
                 attributes:['BUS_STOP_NAME'],
                 where:{
-                    BUS_LINE_NAME:data.lineName, LINE_SEQUENCE:i
+                    BUS_LINE_NAME : data.lineName,
+                    LINE_SEQUENCE:i
                 }
             })
             .then(async(result)=>{
+                console.log(result);
                 p_name= result.dataValues.BUS_STOP_NAME;
                 u_name=line_arr[i-1];
     
@@ -47,7 +49,7 @@ const F_delete = async (line_arr,data)=>{
         await db.BusLine.findAll({//필요없는 값인 데이터들을 삭제하기 전에 먼저 BusTime의 필요없는 값들을 삭제
             attributes:['IDX_BUS_LINE'],
             where:{
-                BUS_LINE_NAME:data.lineName, 
+                BUS_LINE_NAME:data.lineName,
                 LINE_SEQUENCE:{
                     [Op.gt]:line_arr.length
                 }
