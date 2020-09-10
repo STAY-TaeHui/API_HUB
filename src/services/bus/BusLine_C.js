@@ -5,7 +5,7 @@ const postBusLine = async (req,res)=>{
         console.log("This is postBustLine in services");
         
         const data = req.body;
-        const result = await postBusLineDAO(data);
+        const result = await postBusLineDAO(data,res);
         return res.json({RESULT:result});
     } catch (e) {
         console.log("services ERROR"+e);
